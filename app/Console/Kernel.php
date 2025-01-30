@@ -25,6 +25,9 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
+        $schedule->command('news:fetch newsapi')->hourly();
+        $schedule->command('news:fetch nytimes')->hourly();
+        $schedule->command('news:fetch guardian')->hourly();
     }
 
     /**
@@ -38,4 +41,5 @@ class Kernel extends ConsoleKernel
 
         require base_path('routes/console.php');
     }
+  
 }
