@@ -3,7 +3,17 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-
+/**
+ * @OA\Schema(
+ *     schema="Category",
+ *     type="object",
+ *     title="Category Resource",
+ *     description="Category resource representation",
+ *
+ *     @OA\Property(property="id", type="integer", example=1),
+ *     @OA\Property(property="name", type="string", example="Programming"),
+ * )
+ */
 class CategoryResource extends JsonResource
 {
     /**

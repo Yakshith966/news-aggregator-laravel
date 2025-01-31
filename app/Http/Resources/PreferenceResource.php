@@ -6,7 +6,30 @@ use App\Models\Author;
 use App\Models\Category;
 use App\Models\Source;
 use Illuminate\Http\Resources\Json\JsonResource;
-
+/**
+ * @OA\Schema(
+ *     schema="Preference",
+ *     type="object",
+ *     title="Preference Resource",
+ *     description="Preference resource representation",
+ *
+ *     @OA\Property(property="id", type="integer", example=1),
+ *     @OA\Property(property="user_id", type="integer", example=1),
+ *     @OA\Property(property="preferencable_id", type="integer", example=1),
+ *     @OA\Property(property="preferencable_type", type="string", example="App\\Models\\Category"),
+ * @OA\Property(
+ *         property="preferencable",
+ *         type="object",
+ *         oneOf={
+ *
+ *             @OA\Schema(ref="#/components/schemas/Category"),
+ *             @OA\Schema(ref="#/components/schemas/Author"),
+ *             @OA\Schema(ref="#/components/schemas/Source")
+ *         },
+ *         description="Preferencable object"
+ *     )
+ * )
+ */
 class PreferenceResource extends JsonResource
 {
     /**

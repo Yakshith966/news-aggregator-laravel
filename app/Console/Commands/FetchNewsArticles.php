@@ -46,6 +46,7 @@ class FetchNewsArticles extends Command
     private function fetchArticlesFromService($service)
     {
         $articles = $service->fetchArticles();
+        
 
         // dd($articles);
 

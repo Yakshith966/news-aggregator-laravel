@@ -3,7 +3,17 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-
+/**
+ * @OA\Schema(
+ *     schema="Author",
+ *     type="object",
+ *     title="Author Resource",
+ *     description="Author resource representation",
+ *
+ *     @OA\Property(property="id", type="integer", example=1),
+ *     @OA\Property(property="name", type="string", example="John Doe"),
+ * )
+ */
 class AuthorResource extends JsonResource
 {
     /**

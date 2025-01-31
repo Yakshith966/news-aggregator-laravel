@@ -17,7 +17,7 @@ class ListArticlesAction
     public function execute(array $filters): LengthAwarePaginator
     {
         $cacheKey = $this->getCacheKey($filters);
-
+        Cache::forget($cacheKey);
         $products = Cache::remember($cacheKey, 60 * 60, function () use ($filters) {
             $query = Article::query()
                 ->when(

@@ -48,12 +48,13 @@ class NewsAPIService implements NewsApiServiceInterface
         return array_map(function ($article) {
             return [
                 'title' => $article['title'],
-                'content' => $article['content'] ?? $article['description'],
+                'content' => $article['content'] ?? $article['description'] ?? 'Content not found',
                 'published_at' => Carbon::parse($article['publishedAt']),
                 'category_id' => $this->resolveCategoryId($article['category'] ?? 'general'),
-                'author_id' => $this->resolveAuthorId($article['author']),
-                'source_id' => $this->resolveSourceId($article['source']['name']),
+                'author_id' => $this->resolveAuthorId($article['author'] ?? 'Unknown'),
+                'source_id' => $this->resolveSourceId($article['source']['name'] ?? 'Unknown'),
             ];
         }, $articles);
     }
+
 }
