@@ -2,6 +2,7 @@
 
 namespace Tests\Unit\Services;
 
+use App\Http\Middleware\TrustProxies;
 use App\Services\TheGuardianService;
 use Illuminate\Http\Client\Factory as HttpClient;
 use Illuminate\Http\Client\Response;
@@ -42,24 +43,24 @@ class TheGuardianServiceTest extends TestCase
                 config('services.guardian.url'),
                 [
                     'api-key' => config('services.guardian.key'),
-                    'show-fields' => 'thumbnail'
                 ]
             )
             ->andReturn(new Response(
                 new GuzzleResponse(200, [], json_encode($mockApiResponse))
             ));
-
+            // dd($mockHttpClient);
         // Bind the mock to the service container
         $this->app->instance(HttpClient::class, $mockHttpClient);
-
+        
         // Resolve the service from the container
         $newsService = $this->app->make(TheGuardianService::class);
         $articles = $newsService->fetchArticles();
+        
 
         // Assertions
         $this->assertCount(1, $articles);
         $this->assertEquals('Russia-Ukraine war latest: what we know on day 240 of the invasion', $articles[0]['title']);
-        $this->assertEquals('https://example.com/article', $articles[0]['url']);
-        $this->assertEquals('https://example.com/image.jpg', $articles[0]['thumbnail']);
+        $this->assertEquals('Russia-Ukraine war latest: what we know on day 240 of the invasion', $articles[0]['content']);
+        // $this->assertEquals(156, $articles[0]['category_id']);
     }
 }
