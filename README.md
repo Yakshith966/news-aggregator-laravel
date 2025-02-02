@@ -40,7 +40,11 @@ docker-compose exec app php artisan migrate --seed
 
 #### 🔹 Step 7: Set Permissions
 ```sh
-docker-compose exec app chmod -R 775 storage bootstrap/cache
+docker-compose exec app bash -c "
+    chown -R www-data:www-data /var/www/html/storage;
+    chmod -R 775 /var/www/html/storage;
+    chmod -R 775 /var/www/html/bootstrap/cache;
+"
 ```
 
 ---
